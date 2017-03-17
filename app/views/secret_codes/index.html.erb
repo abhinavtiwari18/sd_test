@@ -1,0 +1,49 @@
+<div class="container-fluid">
+
+  <%= form_tag secret_codes_create_path, method: :get, class: 'form-inline col-md-12' do %>
+      <label class="mr-sm-2" for="inlineFormCustomSelect">Generate</label>
+      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="code_count">
+        <option selected>Choose...</option>
+        <option value="1">1</option>
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+
+
+      <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Secret Codes</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+  <% end %>
+
+  <div class="row">
+    <% if @secret_codes.present? %>
+      <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Code</th>
+      <th>Username</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @secret_codes.each do |secret_code| %>
+      <tr>
+        <th scope="row"><%= secret_code.id %></th>
+        <td><%= secret_code.code %></td>
+        <td><%= secret_code.user.email if secret_code.user.present?%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+    <% else %>
+      <h1>No Secret Codes Yet</h1>
+    <% end %>
+  </div>
+
+
+</div>
