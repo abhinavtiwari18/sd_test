@@ -19,6 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         redirect_to :back
       end
     else
+      flash[:alert] = 'Please enter a valid code'
       redirect_to :back
     end
   end
@@ -47,7 +48,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def user_params
+    params.require(:person).permit(:first, :last)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
